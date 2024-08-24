@@ -79,6 +79,20 @@
                             900: '#000000',
                             950: '#000000'
                         },
+                        'purple': {  
+                            DEFAULT: '#353887',  
+                        50: '#9C9ED8', 
+                         100: '#8D90D2', 
+                         200: '#7073C7', 
+                          300: '#5256BB',  
+                         400: '#4144A4', 
+                         500: '#353887',  
+                         600: '#25275F',  
+                         700: '#151736', 
+                         800: '#06060E', 
+                         900: '#000000',  
+                        950: '#000000'
+                    },
                   }
                 }
               }
@@ -145,7 +159,7 @@
                     </div>
                 </div>
          </div>
-                <div id='main' class="p-4 grid grow border-box bg-white-700 grid-cols-2 gap-4">
+                <div id='main' class="p-4 grid grow border-box bg-white-200 grid-cols-2 gap-4">
 
             </div>
         </div>
@@ -364,15 +378,15 @@
 
 
         checkoutForm.cart_details.forEach((x) => {
-            var priceBox = x.discounted_price < x.price ? `<div class='actual-price'>
-                    <span class='discount-price'> `+x.price+`</span>
+            var priceBox = x.discounted_price < x.price ? `<div class='text-seaGreen-300'>
+                    <span class='text-red-300 line-through'> `+x.price+`</span>
                     `+x.discounted_price+`
-                </div>` : `<div class='actual-price'>
+                </div>` : `<div class='text-seaGreen-500'>
                     `+x.price+`
                 </div>` ;
 
 
-                 cartHtml += `<div class="box" style="background-color:aqua;">
+                 cartHtml += `<div class='box bg-red-50 font-medium text-blue-900'>
                     <div style="padding-left:10px; border-radius: 50%; padding-right:10px; display:flex; justify-content:space-between; align-items:centre;">
                         <p>`+ x.name +`</p>
                         `+ priceBox +`
@@ -380,7 +394,7 @@
                             Quantity `+ x.quantity +`
                             </div>
                             <div>
-                                <button onclick="removeItemCart(`+ x.id +`)">
+                                <button class='text-purple-500' onclick="removeItemCart(`+ x.id +`)">
                                     X
                                     </button>
                                 </div>
@@ -401,22 +415,22 @@
 
 
        products.forEach((x) => {
-       var priceBox = x.discounted_price < x.price ? `<div class = 'actual-price'>
-        <span class='discount-price'> `+x.price+ `</span>
+       var priceBox = x.discounted_price < x.price ? `<div class = 'blue-600'>
+        <span class='text-purple-200 line-through'> `+x.price+ `</span>
         `+x.discounted_price+`
-        </div>` : `<div class='actual-price'>
+        </div>` : `<div class='text-seagreen-500'>
             `+x.price+`
             </div>` ;
        
 
-        productHtml += `<div class='grid-item slideDown'>
-            <h1>` + x.name + `</h1>
-            <p>` + x.description + `</p>
+        productHtml += `<div class='bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown'>
+            <h1 class='font-bold'>` + x.name + `</h1>
+            <p class='font-medium'>` + x.description + `</p>
             `+ priceBox +`
             <div class='addToCartBox'>
                 <input type='number' id='qty` + x.id +`'/>
-                <button onclick='addToCart(`+x.id+`)'>Add to Cart</button>
-
+                <button  class='bg-blue-500 text-white-200 font-medium rounded-lg w-32 py-1'onclick='addToCart(`+x.id+`)'>Add to Cart</button>
+               
                 </div>
           </div>`;
 
