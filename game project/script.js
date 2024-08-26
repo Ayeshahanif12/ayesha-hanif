@@ -44,9 +44,12 @@ element.style.gridRow = position.y;
     board.appendChild(foodElement);
  }
 
-
+//generate food
  function  generateFood() {
     const x = Math.floor (Math.random() * gridSize) + 1;
     const y = Math.floor (Math.random() * gridSize) + 1;
     return (x,y);
  }
+
+ //moving the snake 
+ 
