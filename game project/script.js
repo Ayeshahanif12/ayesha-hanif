@@ -68,7 +68,7 @@ element.style.gridRow = position.y;
             head.y--;
             break;
         case 'right':
-            head.y++:
+            head.y++;
             break;   
         
     }
