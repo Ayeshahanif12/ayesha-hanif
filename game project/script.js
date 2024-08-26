@@ -6,6 +6,7 @@ const board = document.getElementById('gameBoard');
  const gridSize =20; 
 let snake= [{ x: 10, y: 10}];
 let food = generateFood();
+let direction = 'right';
 
 //draw game map,snake,food
 function draw() {
@@ -52,4 +53,25 @@ element.style.gridRow = position.y;
  }
 
  //moving the snake 
- 
+ function move(){
+    const head = {...snake(0)};
+    switch (direction) {
+        case'up':
+           head.x--; 
+            break;
+        case 'down':
+            head.x++;
+            break;
+        case 'left':
+            head.y--;
+            break;
+        case 'right':
+            head.y++:
+            break;   
+        
+    }
+    snake.unshift (head);
+    snake.pop();
+ }
+ //test the moving
+ set
