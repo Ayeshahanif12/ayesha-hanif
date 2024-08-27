@@ -33,7 +33,7 @@ function createGameElement(tag,className){
     return element ;  
 }
 // set the position of snake and food
-function setPosition(element,position ){
+function setPosition(element,position ) {
 element.style.gridColumn = position.x;
 element.style.gridRow = position.y;
 }
@@ -51,41 +51,40 @@ element.style.gridRow = position.y;
  function  generateFood() {
     const x = Math.floor (Math.random() * gridSize) + 1;
     const y = Math.floor (Math.random() * gridSize) + 1;
-    return (x,y);
+    return {x , y };
  }
 
  //moving the snake 
  function move(){
-    const head = {...snake(0)};
+    const head = { ...snake[0] };
     switch (direction) {
         case'up':
-           head.x--; 
+           head.y--; 
             break;
         case 'down':
-            head.x++;
+            head.y++;
             break;
         case 'left':
-            head.y--;
+            head.x--;
             break;
         case 'right':
-            head.y++;
+            head.x++;
             break;   
         
     }
     snake.unshift (head);
-   //snake.pop();
+   snake.pop();
 
     if(head.x===food.x && head.y=== food.y){
         food =generateFood();
-        clearInterval(); // remove the previous 
-        gameInterval=setInterval(()=>{
-            move();
-            draw();
-        },gameSpeedDelay);
+    } else {
+        snake.pop();
+
     }
  }
  //test the moving
- setInterval(() => {
+ 
+  gameInterval=setInterval(() => {
     move();
     draw();
- },200);
+ },gameSpeedDelay); 
