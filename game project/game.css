@@ -64,6 +64,8 @@ display: none;
     background-color: #c4cfa3;
 }
 
+<<<<<<< HEAD
+=======
 .snake{
     border: #5a5a5a 1px dotted;
 }
@@ -74,3 +76,4 @@ display: none;
 #logo{
     position: absolute;
 }
+>>>>>>> d57a9118cf2bb956e11cc8e91cc567b7557c23b2

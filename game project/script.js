@@ -75,7 +75,7 @@ element.style.gridRow = position.y;
     snake.unshift (head);
    //snake.pop();
 
-    if(head.x===food.x && Headers.y=== head.y){
+    if(head.x===food.x && head.y=== food.y){
         food =generateFood();
         clearInterval(); // remove the previous 
         gameInterval=setInterval(()=>{
