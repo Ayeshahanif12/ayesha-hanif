@@ -79,7 +79,8 @@ element.style.gridRow = position.y;
 
     if(head.x===food.x && head.y=== food.y){
         food =generateFood();
-        clearInterval();
+        increaseSpeed();
+        clearInterval(gameInterval);
     } else {
         snake.pop();
 
@@ -101,4 +102,45 @@ element.style.gridRow = position.y;
  //start the game 
  function startGame() {
    gameStarted= true; // keep track of the game 
+   instructionText.style.display= 'none';
+   logo.style.display= 'none';
+   gameInterval=setInterval(()=>{
+    move();
+    checkcollisions();
+    draw(); 
+   },gameInterval);
+ }
+ //keypress event listener 
+ function handleKeyPress(event) {
+    if(
+        (!gameStarted && event.code === 'space') ||
+        (!gameStarted && event.key === '')
+     ) {
+        startGame();
+    } else {
+        switch (event.key) {
+            case 'ArrowUp':
+                direction = Up;
+                break;
+                case 'ArrowDown':
+                    direction= Down;
+                    break;
+                case 'ArrowLeft':  
+                direction= left;
+                break;
+                case 'ArrowRight':
+                    direction = right ;
+                    break;
+        }
+    }
+ }
+ document.addEventListener('keydown',handleKeyPress);
+
+ function increaseSpeed(){
+    console.log(gameSpeedDelay);
+    if(gameSpeedDelay>150){
+        gameSpeedDelay-=5
+    } else if(gameSpeedDelay>100){
+        gameSpeedDelay-=3
+    }
  }
