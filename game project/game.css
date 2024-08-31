@@ -24,6 +24,7 @@ body,
     grid-template-columns: repeat(20, 20px);
     grid-template-rows: repeat(20, 20px);
     margin: 5px;
+    background-color: #c4cfa3;
 }
 
 .game-border1 {
@@ -83,10 +84,7 @@ body,
     display: none;
 }
 
-#game-border3,
-#logo {
-    background-color: #c4cfa3;
-}
+
 
 .snake {
     background-color: blueviolet ;
