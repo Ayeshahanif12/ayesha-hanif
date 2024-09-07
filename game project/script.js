@@ -1,7 +1,6 @@
 //Define html element 
 const board = document.getElementById('gameBoard');
 const instructionText = document.getElementById('instruction-text');
-const logo = document.getElementById('logo');
 const score = document.getElementById('score');
 const highScore=document.getElementById('highScore');
 
