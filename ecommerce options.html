@@ -112,7 +112,13 @@
 <body id="app" class="bg-white-100 flex flex-col text-blue-900 h-svh">
     <div class="bg-red-200 p-8">
         <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <button @click="changeMsg">change it</button>
+        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
+        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
+        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
+        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
+        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
+       
+        <button @click="changesMsg">batameez</button>
 
     </div>
 
@@ -182,22 +188,52 @@
         </div>
 </body>
 <script>
- const { createApp, ref } = Vue
+ const { createApp } = Vue
 
 createApp({
-  setup() {
-    const message = ref('abay nikl !')
-
-    const changeMsg = () => {
-        message.value = "tu nhi shudrega na !"
-    }
+  data () {
+   
     return {
-      message,
-      changeMsg,
-    };
+      message : 'ayee maa!'
+     
+    }
   },
+
+  beforeCreate() {
+    alert("we are here before html appears");
+  },
+
+  created() {
+    alert("we here when html created or in  a process of rendering");
+  },
+  beforeMount() {
+ let docCountry = document.getElementById('country');
+ console.log("********** beforeMount *****************");
+ console.log(docCountry);
+  },
+  mounted() {
+    letdocCountry = document.getElementById('country');
+    console.log(docCountry);
+  },
+  beforeUpdate() {
+    alert(" i am here because it changed");
+  },
+  uodated() {
+    alert("i am her because message is updated now");
+    console.log("************ let see *************");
+    console.log(this.message);
+    this.message = " I am changed ";
+  },
+
+ 
+  methods: {
+    changesMsg() {
+        this.message = " I am changed";
+    }
+  }
+
 }).mount('#app')
-</script>
+
 
 
 
