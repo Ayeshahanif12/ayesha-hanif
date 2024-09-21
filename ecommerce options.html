@@ -112,13 +112,9 @@
 <body id="app" class="bg-white-100 flex flex-col text-blue-900 h-svh">
     <div class="bg-red-200 p-8">
         <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
-        <h1 class=" text-blue-900 text-6xl">{{message}}</h1>
        
-        <button @click="changesMsg">batameez</button>
+       
+        <button @click="changesMsg">change me</button>
 
     </div>
 
@@ -183,7 +179,12 @@
                 </div>
             </div>
             <div id='main' class="p-4 grid grow border-box bg-white-200 grid-cols-2 gap-4">
-
+<div style="padding-left: 10px; border-radius: 50%; padding-right: 10px; display: flex; justify-content: space-between; align-items: center; " v-for ="(x,index) in this.checkoutForm.cart_details">
+    <p> {{ x.name}} </p>
+    <div class='text-seaGreen-500' v-if="x.discounted_price < x.price">
+                    
+    </div>
+</div>
             </div>
         </div>
 </body>
@@ -193,45 +194,12 @@
 createApp({
   data () {
    
-    return {
-      message : 'ayee maa!'
-     
-    }
-  },
-
-  beforeCreate() {
-    alert("we are here before html appears");
-  },
-
-  created() {
-    alert("we here when html created or in  a process of rendering");
-  },
-  beforeMount() {
- let docCountry = document.getElementById('country');
- console.log("********** beforeMount *****************");
- console.log(docCountry);
-  },
-  mounted() {
-    letdocCountry = document.getElementById('country');
-    console.log(docCountry);
-  },
-  beforeUpdate() {
-    alert(" i am here because it changed");
-  },
-  uodated() {
-    alert("i am her because message is updated now");
-    console.log("************ let see *************");
-    console.log(this.message);
-    this.message = " I am changed ";
-  },
-
- 
-  methods: {
-    changesMsg() {
+    
+    changesMsg(){
         this.message = " I am changed";
     }
+  
   }
-
 }).mount('#app')
 
 
