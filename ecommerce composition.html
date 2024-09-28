@@ -3,9 +3,8 @@
 <head>
     <title> class html</title>
     <link rel=" icon" type=" image/png" href=" simple-twitter-16x16-icon-png-7.png" />
-
+    <script src="vue.js"></script>
     <script src="tailwindcss.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -109,7 +108,7 @@
 </head>
 
 <body id="app" class="bg-white-50 flex flex-col text-blue-900 h-svh">
-    <div class="bg-red-50 p-8">
+    <div class="bg-red-200 p-8">
         <h1 class="text-blue-500 text-6xl">{{ message }}</h1>
         <button @click="changesMsg">Change me</button>
     </div>
@@ -164,8 +163,11 @@
                             Online Payment
                         </label>
                     </div>
-                    <button type="button" @click="sumbitCheckout()" id="submitBtn"
-                        class="bg-blue-600 text-white-200 p-2 border-0 hover:bg-blue-700 active:bg-blue-700 rounded-md">
+                    <button type="button"
+                     @click="submitCheckout()"
+                      id="submitBtn"
+                     class="bg-blue-600 text-white-200 p-2 border-0 hover:bg-blue-700 active:bg-blue-700 rounded-md"
+                        >
                         Checkout
                     </button>
                 </form>
@@ -185,7 +187,7 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                  " v-for="(x, index) in this.checkoutForm.cart_details">
+                  " v-for="(x, index) in checkoutForm.cart_details">
                                 <p>{{ x.name}}</p>
                                 <div class="text-seaGreen-500" v-if="x.discounted_price < x.price">
                                     <span class="text-red-600 line-through" :data-id="x.id">
@@ -234,7 +236,7 @@
 
     createApp({
         setup() {
-            const messag = ref("hello");
+            const message = ref("hello");
             const initialCheckoutForm = {
                 first_name: "",
                 last_name: "",
@@ -329,8 +331,8 @@
 
 
 
-            const computeTotalCart = computed(() => {
-                const sum = checkoutForm.value.cart_details.reduce((accumulator, currentValue) => {
+            const computedTotalCart = computed(() => {
+                var total= checkoutForm.value.cart_details.reduce((accumulator, currentValue) => {
                     var currentPrice = currentValue.discounted_price < currentValue.price ? currentValue.discounted_price : currentValue.price
                     return accumulator + currentPrice * currentValue.quantity
                 }, 0);
@@ -356,9 +358,9 @@
                         ) {
                             checkValidation = false;
 
-                            document.getElementById(" taskErrorField-" + x).hidden = false;
+                            document.getElementById("taskErrorField-" + x).hidden = false;
                         } else {
-                            document.getElementById(" taskErrorField-" + x).hidden = true;
+                            document.getElementById("taskErrorField-" + x).hidden = true;
                         }
                     });
                     return checkValidation;
@@ -375,7 +377,7 @@
                 const validatePhoneNumber = (phoneNumber) => {
                     const regx = /^(\+92|92|033|03)[ -]*\d{3}[ -]*\d{7}$/;
                     return regx.test(phoneNumber);
-                }
+                };
 
 
                 if (!validatePhoneNumber(checkoutForm.value.phone_number)) {
@@ -388,7 +390,7 @@
                 const validateEmail = (email) => {
                     const regx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                     return regx.test(email);
-                }
+                };
 
                 if (!validateEmail(checkoutForm.value.email)) {
                     document.getElementById(" taskErrorField-email").hidden = false;
@@ -407,16 +409,14 @@
             };
 
             const submitCheckout = () => {
-                debugger;
-                const checkForm = validateFields();
-                if (checkForm) {
-                    alert("Thankyou for Shopping with us");
-                    checkoutForm.value = { ...initialCheckoutForm };
-                    checkoutForm.value.cart_details = [];
-                    document.getElementById(" ecommerceForm").reset();
-
-                }
-            };
+          const checkForm = validateFields();
+          if (checkForm) {
+            alert("Thank you for shopping with us");
+            checkoutForm.value = { ...initialCheckoutForm };
+            checkoutForm.value.cart_details = [];
+            document.getElementById("ecommerceForm").reset();
+          }
+        };
 
 
             const addToCart = (product) => {
@@ -449,7 +449,7 @@
 
 
             function removeItemCart(id) {
-                debugger;
+                
                 var proIndex = checkoutForm.value.cart_details.findIndex((x) => {
                     return x.id == id
                 });
@@ -458,19 +458,19 @@
 
             };
 
-            changeMsg = () => {
+             const changesMsg = () => {
                 message.value = "I am change now";
             };
             return {
-                messag,
+                message,
                 initialCheckoutForm,
                 checkoutForm,
                 addToCart,
                 removeItemCart,
                 products,
                 submitCheckout,
-                computeTotalCart,
-                changeMsg,
+                computedTotalCart,
+                changesMsg,
             };
         },
     }).mount("#app");
