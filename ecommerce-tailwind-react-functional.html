@@ -1,0 +1,182 @@
+<html>
+
+<head>
+  <title> className html</title>
+  <link rel=" icon" type=" image/png" href=" simple-twitter-16x16-icon-png-7.png" />
+
+  <script src="js/react-dev.js"></script>
+  <script src="js/react-dom.js"></script>
+
+  <script src="tailwindcss.js"></script>
+
+  <!-- https://gist.github.com/erspark2002/0ea49cc782049df5f3de271ba9ff41e1 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blue: {
+              DEFAULT: " #353887",
+              50: " #9C9ED8",
+              100: " #8D90D2",
+              200: " #7073C7",
+              300: " #5256BB",
+              400: " #4144A4",
+              500: " #353887",
+              600: " #25275F",
+              700: " #151736",
+              800: " #06060E",
+              900: " #000000",
+              950: " #000000"
+            },
+            red: {
+              DEFAULT: " #CF2E39",
+              50: " #FEFBFB",
+              100: " #F9E4E6",
+              200: " #EFB6BA",
+              300: " #E5898F",
+              400: " #DA5B63",
+              500: " #CF2E39",
+              600: " #A9262F",
+              700: " #841D24",
+              800: " #5E151A",
+              900: " #390D10",
+              950: " #26080A"
+            },
+            white: {
+              DEFAULT: " #E8E8E8",
+              50: " #FFFFFF",
+              100: " #FCFCFC",
+              200: " #F7F7F7",
+              300: " #F2F2F2",
+              400: " #EDEDED",
+              500: " #E8E8E8",
+              600: " #CCCCCC",
+              700: " #B0B0B0",
+              800: " #949494",
+              900: " #787878",
+              950: " #6A6A6A"
+            },
+            black: {
+              DEFAULT: " #0F0F0F",
+              50: " #6B6B6B",
+              100: " #616161",
+              200: " #4D4D4D",
+              300: " #383838",
+              400: " #242424",
+              500: " #0F0F0F",
+              600: " #0A0A0A",
+              700: " #050505",
+              800: " #000000",
+              900: " #000000",
+              950: " #000000"
+            },
+            " seaGreen": {
+              DEFAULT: " #31A24C",
+              50: " #A6E4B5",
+              100: " #97DFA8",
+              200: " #77D68E",
+              300: " #58CD74",
+              400: " #3AC15B",
+              500: " #31A24C",
+              600: " #247738",
+              700: " #174C24",
+              800: " #0A210F",
+              900: " #000000",
+              950: " #000000"
+            },
+            purple: {
+              DEFAULT: " #353887",
+              50: " #9C9ED8",
+              100: " #8D90D2",
+              200: " #7073C7",
+              300: " #5256BB",
+              400: " #4144A4",
+              500: " #353887",
+              600: " #25275F",
+              700: " #151736",
+              800: " #06060E",
+              900: " #000000",
+              950: " #000000"
+            },
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-white-50 flex flex-col text-blue-900 h-svh">
+  <div id="AppComponent"></div>
+</body>
+  <script src="https://unpkg.com/@babel/standalone@7.10.3/babel.min.js" crossorigin></script>
+  <script type="text/babel" data-presets="react,stage-3">
+    const Example = () => {
+      const [count,setCount] = React.useState(0);
+      React.useState(()=> {
+        document.title = `you clicked ${count} times`;
+
+      });
+      return (
+<div>
+  <p>You Clicked {count} times </p>
+  <button onClick={()=> setCount(count + 1)}>
+    Click me
+    </button>
+  </div>
+      );
+};
+
+const ProductBox = () =>{
+  const products = [
+  {
+                id: 1,
+                name: 'water bottle',
+                description: 'color: blue size: large',
+                price: 100,
+                discounted_price: 99,
+            },
+            {
+                id: 2,
+                name: 'mouse',
+                description: 'wired usb port',
+                price: 250,
+                discounted_price: 199,
+            },
+            {
+                id: 3,
+                name: 'watch',
+                description: 'color: black, watch type: smart, brand: apple',
+                price: 5000,
+                discounted_price: 4999,
+            },
+            {
+                id: 4,
+                name: 'infinix s23',
+                description: 'color blue, storage: 120gb ram: 2gb display: 6x4',
+                price: 25000,
+                discounted_price: 24999,
+            },
+            {
+                id: 5,
+                name: 'shoes',
+                description: 'size: 8, color blue, type: sports wear',
+                price: 3000,
+                discounted_price: 3000,
+            },
+  ]
+}
+      
+      return (        
+        <>
+          {
+            products.map((x)=>>) 
+          }
+        </>
+      )
+
+    
+    const root = ReactDOM.createRoot(document.getElementById("AppComponent"))
+    root.render(<Example   />);
+  </script>
+</html>
