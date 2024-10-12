@@ -1,611 +1,294 @@
-<html>
-
-<head>
-  <title> className html</title>
-  <link rel=" icon" type=" image/png" href=" simple-twitter-16x16-icon-png-7.png" />
-
-  <script src="js/react-dev.js"></script>
-  <script src="js/react-dom.js"></script>
-
-  <script src="tailwindcss.js"></script>
-
-  <!-- https://gist.github.com/erspark2002/0ea49cc782049df5f3de271ba9ff41e1 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            blue: {
-              DEFAULT: " #353887",
-              50: " #9C9ED8",
-              100: " #8D90D2",
-              200: " #7073C7",
-              300: " #5256BB",
-              400: " #4144A4",
-              500: " #353887",
-              600: " #25275F",
-              700: " #151736",
-              800: " #06060E",
-              900: " #000000",
-              950: " #000000"
-            },
-            red: {
-              DEFAULT: " #CF2E39",
-              50: " #FEFBFB",
-              100: " #F9E4E6",
-              200: " #EFB6BA",
-              300: " #E5898F",
-              400: " #DA5B63",
-              500: " #CF2E39",
-              600: " #A9262F",
-              700: " #841D24",
-              800: " #5E151A",
-              900: " #390D10",
-              950: " #26080A"
-            },
-            white: {
-              DEFAULT: " #E8E8E8",
-              50: " #FFFFFF",
-              100: " #FCFCFC",
-              200: " #F7F7F7",
-              300: " #F2F2F2",
-              400: " #EDEDED",
-              500: " #E8E8E8",
-              600: " #CCCCCC",
-              700: " #B0B0B0",
-              800: " #949494",
-              900: " #787878",
-              950: " #6A6A6A"
-            },
-            black: {
-              DEFAULT: " #0F0F0F",
-              50: " #6B6B6B",
-              100: " #616161",
-              200: " #4D4D4D",
-              300: " #383838",
-              400: " #242424",
-              500: " #0F0F0F",
-              600: " #0A0A0A",
-              700: " #050505",
-              800: " #000000",
-              900: " #000000",
-              950: " #000000"
-            },
-            " seaGreen": {
-              DEFAULT: " #31A24C",
-              50: " #A6E4B5",
-              100: " #97DFA8",
-              200: " #77D68E",
-              300: " #58CD74",
-              400: " #3AC15B",
-              500: " #31A24C",
-              600: " #247738",
-              700: " #174C24",
-              800: " #0A210F",
-              900: " #000000",
-              950: " #000000"
-            },
-            purple: {
-              DEFAULT: " #353887",
-              50: " #9C9ED8",
-              100: " #8D90D2",
-              200: " #7073C7",
-              300: " #5256BB",
-              400: " #4144A4",
-              500: " #353887",
-              600: " #25275F",
-              700: " #151736",
-              800: " #06060E",
-              900: " #000000",
-              950: " #000000"
-            },
-          },
-        },
-      },
-    };
-  </script>
-</head>
-
-<body class="bg-white-50 flex flex-col text-blue-900 h-svh">
-  <div id="AppComponent"></div>
-</body>
-<script src="https://unpkg.com/@babel/standalone@7.10.3/babel.min.js" crossorigin></script>
-<script type="text/babel" data-presets="react,stage-3">
-  const Example = () => {
-    const [count, setCount] = React.useState(0);
-    React.useState(() => {
-      document.title = `you clicked ${count} times`;
-
-    });
-    return (
-      <div>
-        <p>You Clicked {count} times </p>
-        <button onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
-      </div>
-    );
-  };
-
-  const PriceBox = ({ price, discounted_price }) => {
-    const calculatePrice = discounted_price < price;
-    if (calculatePrice) {
-      return (
-        <div className=" text-seaGreen-500">
-          <span className="text-red-600  line-through"> {price}</span>
-          {discounted_price}
-        </div>
-      )
-    }
-    return (
-      <div className="text-seaGreen-500">{price}</div>
-    )
-  }
-
-  const ProductBox = ({ product, checkoutForm, updateCart, ...rest }) => {
-    const addToCart = (product) => {
-  const  currentProduct = products.find((x) => {
-
-        return x.id == product;
-      });
-      var currentQty =
-        document.getElementById("qty" + product).value == "" ||
-          document.getElementById("qty" + product).value == null
-          ? 1
-          : document.getElementById("qty" + product).value;
-      cartExistIndex = checkoutForm.cart_details.findIndex((x) => {
-        return x.id == product;
-      });
-      if (cartExistIndex != -1) {
-        checkoutForm.cart_details[cartExistIndex].quantity +=
-          parseInt(currentQty);
-      } else {
-        var cartItem = {
-          ...currentProduct,
-          quantity: currentQty,
-        };
-
-        checkoutForm.cart_details.push(cartItem);
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Functional</title>
+    <script src="react-dev.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: sans-serif;
       }
-      updateCart(checkoutForm.cart_details);
-      document.getElementById("qty" + product).value = "";
-    }
-    return (
-      <div className="bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown">
-        <h1 className="font-bold">{product.name}</h1>
-        <p className="font-medium">{product.description}</p>
-        <PriceBox price={product.price} discounted_price={product.discounted_price} />
-        <div className="">
-          <input type="number" id={"qty" + product.id} />
-          <button
-            className="bg-blue-400 text-white-200 font-medium rounded-lg w-32 py-1"
-            onClick={() => { addToCart(product.id) }}
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  const CartsBox = ({ name, price, discounted_price, quantity, ...cartDetails }) => {
-
-
-    return (
-      <div className="box bg-red-50 font-medium text-blue-900">
-        <div style={{
-          "PaddingLeft": "10px", 'BorderRadius': '50%', 'PaddingRight': '10px', 'display': 'flex', 'JustifyContent': 'SpaceBetween', 'AlignItems': 'center'
-        }}>
-          <p >{name}</p>
-          <PriceBox price={price} discounted_price={discounted_price} />
-          <div>
-            Quantity {quantity}
-          </div>
-          <div>
-            <button className="text-red-500" >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  const ProductList = ({ updateCart, checkoutForm }) => {
-    const [checkFormVal, setCheckFormVal] = React.useState(checkoutForm)
-
-
-
-    const products = [
-      {
-        id: 1,
-        name: 'water bottle',
-        description: 'color: blue size: large',
-        price: 100,
-        discounted_price: 99,
-      },
-      {
-        id: 2,
-        name: 'mouse',
-        description: 'wired usb port',
-        price: 250,
-        discounted_price: 199,
-      },
-      {
-        id: 3,
-        name: 'watch',
-        description: 'color: black, watch type: smart, brand: apple',
-        price: 5000,
-        discounted_price: 4999,
-      },
-      {
-        id: 4,
-        name: 'infinix s23',
-        description: 'color blue, storage: 120gb ram: 2gb display: 6x4',
-        price: 25000,
-        discounted_price: 24999,
-      },
-      {
-        id: 5,
-        name: 'shoes',
-        description: 'size: 8, color blue, type: sports wear',
-        price: 3000,
-        discounted_price: 3000,
-      },
-    ];
-    const ProductBox = ({name, product, checkoutForm, updateCart, ...rest}) => {
-        
-
-        function addToCart(productId) {
-            
-            var currentProduct = products.find((x) => { return x.id == productId });
-            var currentQty = document.getElementById('qty' + productId).value == '' || document.getElementById('qty' + productId).value == null ? 1 : document.getElementById('qty' + productId).value;
-            cartExistIndex = checkoutForm.cart_details.findIndex((x) => { return x.id == productId });
-
-            var isDecimal = currentQty != Math.trunc(currentQty);
-
-            if (currentQty < 1 || isDecimal) {
-                alert('please enter valid quantity');
-                document.getElementById(`qty` + productId).value = '';
-                return false
-            }
-
-            if (cartExistIndex != -1) {
-                checkoutForm.cart_details[cartExistIndex].quantity = parseInt(checkoutForm.cart_details[cartExistIndex].quantity) + parseInt(currentQty);
-            } else {
-                // debugger;
-                var cartItem = {
-                    ...currentProduct,
-                    quantity: parseInt(currentQty),
-                    totalAmount: function(){
-                        actualPrice = this.price > this.discounted_price ? this.discounted_price : this.price;
-                        return actualPrice * this.quantity
-                    }
-                }
-                checkoutForm.cart_details.push(cartItem);
-            }
-            updateCart(checkoutForm.cart_details)
-            document.getElementById(`qty` + productId).value = '';
-        }
-        
-        return(
-            <div className='grid-item bg-red-50-300 rounded-lg p-5'>
-                <h1>{ name }</h1>
+    </style>
+  </head>
+  <body>
+    <div id="AppComponent"></div>
+ 
+    <script type="text/babel">
+      const initialCheckoutForm = {
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        address: '',
+        email: '',
+        postal_code: '',
+        city: 'Karachi',
+        country: 'Pakistan',
+        payment_method: 'Cash on Delivery',
+        cart_details: [],
+      };
+ 
+      const products = [
+        {
+          id: 1,
+          name: 'Water Bottle',
+          description: 'Color: Blue, Size: Large',
+          price: 100,
+          discounted_price: 99,
+        },
+        {
+          id: 2,
+          name: 'Mouse',
+          description: 'Wired USB Port',
+          price: 250,
+          discounted_price: 199,
+        },
+        {
+          id: 3,
+          name: 'Watch',
+          description: 'Color: Black, Watch Type: Smart, Brand: Apple',
+          price: 5000,
+          discounted_price: 4999,
+        },
+        {
+          id: 4,
+          name: 'Infinix S23',
+          description: 'Color: Blue, Storage: 120GB, RAM: 2GB, Display: 6x4',
+          price: 25000,
+          discounted_price: 24999,
+        },
+        {
+          id: 5,
+          name: 'Shoes',
+          description: 'Size: 8, Color: Blue, Type: Sports Wear',
+          price: 3000,
+          discounted_price: 3000,
+        },
+      ];
+ 
+      const ProductBox = ({ addToCart }) => {
+        return (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 p-4">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white text-black p-4 rounded-md shadow-2xl"
+              >
+                <h1 className="font-bold">{product.name}</h1>
                 <p>{product.description}</p>
-                <PriceBox price={product.price} discounted_price={product.discounted_price} />
-                <div className='addToCartsBox'>
-                    <input className="h-6 rounded bg-red-100 pl-1 mb-1" type='number' id={"qty" + product.id}/>
-                    <button className=" bg-red-500 px-1 rounded"  onClick={() => {addToCart(product.id)}}>Add to Cart</button>
-                </div>
-            </div>
-        )
-    }
-    return (
-      <>
-        {
-          products.map((x, index) => {
-            return (
-              <ProductBox key={index} product={x} checkoutForm={checkoutForm} updateCart={(cart) => { updateCart(cart) }} arrayIndex={index} style="" id="" />
-            )
-          })
-        }
-      </>
-    )
-  }
-
-  const Total = ({cart}) => {
-            
-            var totalPrice = cart.reduce((amount, Value) => {
-                var currentPrice = Value.discounted_price < currentValue.price ? currentValue.discounted_price : currentValue.price
-                return amount + currentPrice * currentValue.quantity
-            }, 0);
-
-            if (totalPrice == 0) {return(<></>)}
-            
-            return(
-                <div className="bg-white rounded" id="totalAmountBox">
-                    <p className="ml-2">Total: {totalPrice}</p> 
-                </div>
-            )
-
-    }
-
-  const CartList = ({ cart }) => {
-    return (
-      <div id="boxList" style={{ width: "80%", display: "flex", flexDirection: "column", gap: "4px" }}
-        className="grid-item slideDown">
-        {
-          cart.map((x) => {
-            return (
-              <CartsBox cartDetail={x} />
-            )
-          })
-        }
-      </div>
-    )
-  }
-
-
-
-  const Application = () => {
-
-    const [message, setMessage] = React.useState('Hello React!');
-    const [cart, setCart] = React.useState([]);
-    const initialCheckoutForm = {
-      first_name: "",
-      last_name: "",
-      phone_number: 0,
-      address: "",
-      email: "",
-      postal_code: "",
-      city: "",
-      country: "",
-      payment_method: "",
-      shipping_details: {
-        address: "",
-        city: "",
-        postal_code: "",
-        country: "",
-        phone_number: "",
-        reciever_name: "",
-      },
-      total_amount: "",
-      cart_details: [],
-    };
-    const [checkoutForm, setCheckoutForm] = React.useState(initialCheckoutForm);
-
-    
-
-    React.useEffect(() => {
-      debugger;
-      setCart(checkoutForm.cart_details)
-    }, [checkoutForm.cart_details])
-
-    const updateCart = (cart) => {
-            setCheckoutForm((prev) => {
-                const newObject = {...prev}
-                newObject.cart_details = cart;
- 
-                return newObject;
-            })
-        }
- 
-        function validateFields() {
-            var basicFields = [
-                'first_name',
-                'last_name',
-                'address',
-                'postal_code'
-            ]
- 
-            const basicValidation = () => {
-                var checkVaildation = true;
-                basicFields.forEach((x) => {
-                    if (document.getElementById(x).value == '' || document.getElementById(x).value == null) {
-                        checkVaildation = false;
-                        document.getElementById('taskErrorField-' + x).hidden = false
-                    } else {
- 
-                        document.getElementById('taskErrorField-' + x).hidden = true
+                {product.discounted_price < product.price ? (
+                  <div className="text-pink-500">
+                    <span className="text-red-600 line-through">{product.price}</span>{' '}
+                    {product.discounted_price}
+                  </div>
+                ) : (
+                  <div>{product.price}</div>
+                )}
+                <div className="mt-2">
+                  <input type="number" id={`qty${product.id}`} defaultValue={1} />
+                  <button
+                    className="bg-pink-500 text-white px-4 py-2 rounded-lg ml-2"
+                    onClick={() =>
+                      addToCart(product.id, parseInt(document.getElementById(`qty${product.id}`).value))
                     }
-                })
-                return checkVaildation
-            }
- 
-            var testBasicValidation = basicValidation();
-            if (!testBasicValidation) {
-                return false
-            }
- 
-            const validatePhoneNumber = (phoneNumber) => {
-                const regex = /^(\+92|92|033|03)[ -]*\d{3}[ -]*\d{7}$/;
-                return regex.test(phoneNumber);
-            }
- 
-            if (!validatePhoneNumber(document.getElementById('number').value)) {
-                document.getElementById('taskErrorField-number').hidden = false
-                return false
-            } else {
-                document.getElementById('taskErrorField-number').hidden = true
-            }
- 
-            const validateEmail = (email) => {
-                const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                return regex.test(email);
-            }
- 
-            if (!validateEmail(document.getElementById('email').value)) {
-                document.getElementById('taskErrorField-email').hidden = false;
-                return false;
-            } else {
-                document.getElementById('taskErrorField-email').hidden = true;
-            }
- 
- 
-            if (checkoutForm.cart_details.length == 0) {
-                alert("Please add items in your cart first");
-                return false
-            }
-            return true
-        }
- 
-        function sumbitCheckout (){
- 
-            const checkForm = validateFields();
-            if (checkForm) {
-                setCheckoutForm(initialCheckoutForm)
-                document.getElementById('ecommerceForm').reset();
-            }
-        }
- 
-
-
-
-    return (
-      <>
-        <div className="bg-red-50 p-8">
-          <h1 className="text-blue-500 text-6xl"> {message}</h1>
-          <h1 className="text-blue-500 text-6xl"> {message}</h1>
-          <button onClick={() => { changeMessageValue("This has been Changed") }}>
-            Change me please!
-          </button>
-        </div>
-        <div id='container' className="flex grow flex-column">
-          <div className="w-72 box-border p-8 bg-red-100">
-            <h1 className="text-blue-400 text-2xl">Sidebar</h1>
-          </div>
-          <div id='mainBox' className="flex w-full gap-4">
-            <div className='bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown' style={{ width: '30%' }}>
-              <form id='ecommerceForm'
-                style={{ display: "flex", "flexDirection": "column", gap: "4px" }}>
-                <label>Checkout Form</label>
-                <input type='text' name='first_name' required id='first_name' placeholder="Enter you first_name" />
-                <span style={{ color: 'red' }} hidden id='taskErrorField-first_name'>This field is required</span>
-                <input type='text' name='last_name' required id='last_name' placeholder="Enter you last_name" />
-                <span style={{ color: 'red' }} hidden id='taskErrorField-last_name'>This field is required</span>
-                <input type='tel' name='number' required id='number' placeholder="Enter you phone_number" />
-                <span style={{ color: 'red' }} hidden id='taskErrorField-number'>This field is required</span>
-                <textarea id="address" name="address" placeholder="enter your full address"></textarea>
-                <span style={{ color: 'red' }} hidden id='taskErrorField-address'>This field is required</span>
-                <input type='email' name='email' required id='email' placeholder="Enter you email" />
-                <span style={{ color: 'red' }} hidden id='taskErrorField-email'>This field is required</span>
-                <input type='text' name='postal_code' required id='postal_code'
-                  placeholder="Enter you postal_code" />
-                <span style={{ color: 'red' }} hidden id='taskErrorField-postal_code'>This field is required</span>
-                <select id="city" name="city" defaultValue="Karachi">
-                  <option>Karachi</option>
-                  <option>Lahore</option>
-                  <option>Islamabed</option>
-                  <option>Peshawar</option>
-                  <option>Queta</option>
-                </select>
-                <span style={{ color: 'red' }} hidden id='taskErrorField-city'>This field is required</span>
-                <select id="country" name="country" defaultValue="Pakistan">
-                  <option>Pakistan</option>
-                </select>
-                <span style={{ color: 'red' }} hidden id='taskErrorField-country'>This field is required</span>
-                <div>
-                  <label className="flex gap-2 blue-700">
-                    <input type='radio' name='task' required id='payment_method' defaultChecked={true}
-                      placeholder="Enter you payment_method" />
-                    Cash on Delivery
-                  </label>
-                  <label className="flex gap-2">
-                    <input type='radio' name='task' required id='payment_method'
-                      placeholder="Enter you payment_method" />
-                    Online Payment
-                  </label>
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-                <button type='button' id='submitBtn' className='bg-blue-600 text-white-200 p-2 border-0 hover:bg-blue-700 active:bg-blue-700 rounded-md'>Checkout</button>
-              </form>
-              <div>
-                <label>Cart Details</label>
-                <CartList cart={cart} />
+              </div>
+            ))}
+          </div>
+        );
+      };
+ 
+      const Application = () => {
+        const [checkoutForm, setCheckoutForm] = React.useState(initialCheckoutForm);
+ 
+        const addToCart = (productId, quantity) => {
+          const product = products.find((p) => p.id === productId);
+          const existingCartItem = checkoutForm.cart_details.find((item) => item.id === productId);
+ 
+          const updatedCart = existingCartItem
+            ? checkoutForm.cart_details.map((item) =>
+                item.id === productId ? { ...item, quantity: item.quantity + quantity } : item
+              )
+            : [...checkoutForm.cart_details, { ...product, quantity }];
+ 
+          setCheckoutForm({ ...checkoutForm, cart_details: updatedCart });
+        };
+ 
+        const removeFromCart = (productId) => {
+          const updatedCart = checkoutForm.cart_details.filter((item) => item.id !== productId);
+          setCheckoutForm({ ...checkoutForm, cart_details: updatedCart });
+        };
+ 
+        const handleInputChange = (e) => {
+          const { name, value } = e.target;
+          setCheckoutForm({ ...checkoutForm, [name]: value });
+        };
+ 
+        const submitCheckout = () => {
+          alert(`Checkout successful!
+Name: ${checkoutForm.first_name} ${checkoutForm.last_name}
+Phone: ${checkoutForm.phone_number}
+Email: ${checkoutForm.email}
+City: ${checkoutForm.city}
+Country: ${checkoutForm.country}
+Payment: ${checkoutForm.payment_method}`);
+ 
+          setCheckoutForm(initialCheckoutForm);
+        };
+ 
+        return (
+          <>
+            <div className="bg-pink-50 p-8">
+              <h1 className="text-pink-500 text-6xl">Checkout</h1>
+            </div>
+ 
+            <div id="container" className="flex p-4">
+              <div id="mainBox" className="w-full flex flex-wrap gap-4">
+                <div id="checkoutForm" className="w-1/3 p-4 bg-white rounded-md shadow-md">
+                  <h2 className="text-xl font-bold mb-4">Checkout Form</h2>
+ 
+                  <input
+                    type="text"
+                    name="first_name"
+                    value={checkoutForm.first_name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your first name"
+                    className="mb-2 p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="last_name"
+                    value={checkoutForm.last_name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your last name"
+                    className="mb-2 p-2 border rounded"
+                  />
+                  <input
+                    type="tel"
+                    name="phone_number"
+                    value={checkoutForm.phone_number}
+                    onChange={handleInputChange}
+                    placeholder="Enter your phone number"
+                    className="mb-2 p-2 border rounded"
+                  />
+                  <textarea
+                    name="address"
+                    value={checkoutForm.address}
+                    onChange={handleInputChange}
+                    placeholder="Enter your full address"
+                    className="mb-2 p-2 border rounded w-full"
+                  ></textarea>
+                  <input
+                    type="email"
+                    name="email"
+                    value={checkoutForm.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter your email"
+                    className="mb-2 p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="postal_code"
+                    value={checkoutForm.postal_code}
+                    onChange={handleInputChange}
+                    placeholder="Enter your postal code"
+                    className="mb-2 p-2 border rounded"
+                  />
+                  <select
+                    name="city"
+                    value={checkoutForm.city}
+                    onChange={handleInputChange}
+                    className="mb-2 p-2 border rounded"
+                  >
+                    <option>Karachi</option>
+                    <option>Lahore</option>
+                    <option>Islamabad</option>
+                    <option>Peshawar</option>
+                    <option>Quetta</option>
+                  </select>
+                  <select
+                    name="country"
+                    value={checkoutForm.country}
+                    onChange={handleInputChange}
+                    className="mb-2 p-2 border rounded"
+                  >
+                    <option>Pakistan</option>
+                  </select>
+ 
+                  <div>
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="payment_method"
+                        value="Cash on Delivery"
+                        checked={checkoutForm.payment_method === 'Cash on Delivery'}
+                        onChange={handleInputChange}
+                      />
+                      Cash on Delivery
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="payment_method"
+                        value="Online Payment"
+                        checked={checkoutForm.payment_method === 'Online Payment'}
+                        onChange={handleInputChange}
+                      />
+                      Online Payment
+                    </label>
+                  </div>
+                </div>
+ 
+                <div id="main" className="w-2/3">
+                  <ProductBox addToCart={addToCart} />
+                </div>
               </div>
             </div>
-            <div id='main' className="p-4 grid grow border-box grid-cols-2 gap-4">
-              <ProductList updateCart={(cart) => { updateCart(cart) }} checkoutForm={checkoutForm} />
+ 
+            <div className="p-4">
+              <h2 className="text-lg font-bold">Cart Details</h2>
+              {checkoutForm.cart_details.length === 0 ? (
+                <p>Your cart is empty.</p>
+              ) : (
+                <div>
+                  {checkoutForm.cart_details.map((item) => (
+                    <div key={item.id} className="bg-gray-100 p-2 mb-2">
+                      <span>
+                        {item.name} (Qty: {item.quantity})
+                      </span>
+                      <button
+                        className="text-red-500 ml-4"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+ 
+              {checkoutForm.cart_details.length > 0 && (
+                <button
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4"
+                  onClick={submitCheckout}
+                >
+                  Checkout
+                </button>
+              )}
             </div>
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  const root = ReactDOM.createRoot(document.getElementById("AppComponent"))
-  root.render(<Application />);
-
-const RenderCarts = ({cartValue,updateValue})
-
-function removeItem(id,Quantity){
-  const updatedCart = [...cartValue];
-  const index = cart.findIndex( x => x.id === id);
-  cartValue[index].quantity = parseInt(cartValue[index].quantity) + Quantity;
-
-  if(cartValue[index].quantity === 0 ){
-    cartValue.splice(index,1)
-  }
-updateValue(cartValue)
-
-
-    
-        /**
-         * This function is used to remove items from cart
-         * @params number id
-         * return void | null
-         */
-
-
-        function removeItemCart(id) {
-    
-    var proIndex = cartValue.findIndex((x) => {
-      return x.id == id;
-    });
-    cartValue.splice(proIndex,1);
- updateValue(cartValue)
-        
-  }
-  return(
-    <div className="box bg-bg-red-50 rounded">
-    <div className="pl-2.5 pr-2.5 flex JustifyBetween ItemsCenter">
-        <p>{x.name}</p>
-        <PriceBox price={x.price} discounted_price={x.discounted_price} />
-
-        <div className="flex ItemsCenter">
-            <button 
-                className="h-8 mb-1.5 w-8 flex ItemsCenter JustifyCenter"
-                onClick={() => { removeItem(x.id, 1) }}
-            >
-                <span className="text-3xl leading-none">+</span>
-            </button>
-
-            <p className="inline mx-2 text-xl leading-none">{x.quantity}</p>
-
-            <button 
-                className="h-8 mb-1.5 w-8 flex ItemsCenter JustifyCenter"
-                onClick={() => { removeItem(x.id, -1) }}
-            >
-                <span className="text-3xl leading-none">-</span>
-            </button>
-        </div>
-
-        <div>
-            {x.totalAmount()}
-        </div>
-
-        <div>
-            <button 
-                className="h-8 mb-1.5 w-8 flex ItemsCenter JustifyCenter"
-                onClick={() => { removeItemCart(x.id) }}
-            >
-                <span className="text-xl leading-none text-purple">X</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-  )
-}    
-</script>
-
+          </>
+        );
+      };
+ 
+      const root = ReactDOM.createRoot(document.getElementById('AppComponent'));
+      root.render(<Application />);
+    </script>
+  </body>
 </html>
+ 
